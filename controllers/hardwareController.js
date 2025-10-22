@@ -33,6 +33,26 @@ export const getMotherboards = async (req, res) => {
   }
 };
 
+export const getGpu = async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM gpu');
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch gpu' });
+  }
+};
+
+export const getRAM = async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM ram');
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch ram' });
+  }
+};
+
 export const getRecommendations = async (req, res) => {
   try {
     const { cpuId, psuId, moboId, budget, strictBudget } = req.body;

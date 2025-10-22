@@ -1,9 +1,11 @@
-import express from 'express';
-import { getHardware, addHardware } from '../controllers/hardwareController2.js';
+import express from "express";
+import multer from "multer";
+import { addHardware, getHardware } from "../controllers/hardwareController2.js";
 
 const router = express.Router();
+const upload = multer({ dest: "uploads/" });
 
-router.get('/get/:type', getHardware);
-router.post('/add/:type', addHardware);
+router.post("/add/:type", upload.single("image"), addHardware);
+router.get("/get/:type", getHardware);
 
 export default router;
